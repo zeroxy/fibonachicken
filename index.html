@@ -13,6 +13,19 @@
              1346269, 2178309, 3524578, 5702887, 9227465, 14930352, 24157817, 39088169,
              63245986, 102334155, 165580141, 267914296, 433494437, 701408733, 1134903170,
              1836311903];
+    $scope.chilist=[
+    {"name":"둘둘치킨","val":15000},
+    {"name":"굽네치킨","val":14000},
+    {"name":"치킨매니아","val":15000},
+    {"name":"네네치킨","val":15000},
+    {"name":"페리카나","val":15000},
+    {"name":"교촌치킨","val":14000},
+    {"name":"또래오래치킨","val":14000},
+    {"name":"비비큐","val":15000},
+    {"name":"파파이스","val":16600},
+    {"name":"KFC","val":18900},
+    {"name":"롯데리아","val":17900}
+    ];
     $scope.humancount=4;
     $scope.chickencount = calc($scope.humancount);
     $scope.changehuman= function(){
@@ -44,8 +57,11 @@
       이걸 시킬 돈이나 있을지 모르겟.....
       </span>
       <span ng-show="dfdf.hc.$error.number==false&&dfdf.hc.$error.max==false&&dfdf.hc.$error.min==false">
-      {{humancount}} 명이 먹을땐..
-      {{chickencount}} 마리를 주문하면 됩니다.
+      {{humancount}} 명이 먹을땐..<br/>
+      {{chickencount}} 마리를 주문하면 됩니다.<br/>
+      <div ng-repeat="chi in chilist">
+        {{chi.name}} 에 주문시 {{chi.val*chickencount}} 원이 필요합니다.
+      </div>
       </span>
       <span ng-show="dfdf.hc.$error.number==true">
       몇사람이 먹을건지 숫자를 넣으세요!!
