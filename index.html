@@ -1,49 +1,63 @@
-<!DOCTYPE html>
-<html>
-
-  <head>
-    <meta charset='utf-8'>
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <meta name="description" content="Fibonachicken : 피보나치킨 페이지 프로젝트">
-
-    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
-
-    <title>Fibonachicken</title>
-  </head>
-
-  <body>
-
-    <!-- HEADER -->
-    <div id="header_wrap" class="outer">
-        <header class="inner">
-          <a id="forkme_banner" href="https://github.com/zeroxy/fibonachicken">View on GitHub</a>
-
-          <h1 id="project_title">Fibonachicken</h1>
-          <h2 id="project_tagline">피보나치킨 페이지 프로젝트</h2>
-
-            <section id="downloads">
-              <a class="zip_download_link" href="https://github.com/zeroxy/fibonachicken/zipball/master">Download this project as a .zip file</a>
-              <a class="tar_download_link" href="https://github.com/zeroxy/fibonachicken/tarball/master">Download this project as a tar.gz file</a>
-            </section>
-        </header>
+<html ng-app="fibapp">
+<head>
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+  <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.27/angular.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+  <script language="javascript">
+    var app = angular.module('fibapp',[]);
+    app.controller('fibctrl',function($scope){
+    $scope.fibnaci=[1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987, 1597, 2584, 4181,
+             6765, 10946, 17711, 28657, 46368, 75025, 121393, 196418, 317811, 514229, 832040,
+             1346269, 2178309, 3524578, 5702887, 9227465, 14930352, 24157817, 39088169,
+             63245986, 102334155, 165580141, 267914296, 433494437, 701408733, 1134903170,
+             1836311903];
+    $scope.humancount=4;
+    $scope.chickencount = calc($scope.humancount);
+    $scope.changehuman= function(){
+      $scope.chickencount = calc($scope.humancount);
+    }
+    function calc(human){
+      console.log(human);
+      if(human<1)
+        return 0;
+      for(var i=$scope.fibnaci.length;i>0;i--){
+        if($scope.fibnaci[i]<=human){
+          return $scope.fibnaci[i-1]+calc(human-$scope.fibnaci[i])
+        }
+      }
+      return 0;
+    }
+    });
+  </script>
+</head>
+<body ng-controller="fibctrl">
+<div class = "container" name="asdf">
+  <div class= "row">
+    <div class="xs-cols-12">
+      {{test}}
+      <form name="dfdf">
+      <input name="hc" type="number" ng-model="humancount" min="1" max="40000" ng-change="changehuman()">
+      </form>
+      <span ng-show="chickencount>100">
+      이걸 시킬 돈이나 있을지 모르겟.....
+      </span>
+      <span ng-show="dfdf.hc.$error.number==false&&dfdf.hc.$error.max==false&&dfdf.hc.$error.min==false">
+      {{humancount}} 명이 먹을땐..
+      {{chickencount}} 마리를 주문하면 됩니다.
+      </span>
+      <span ng-show="dfdf.hc.$error.number==true">
+      몇사람이 먹을건지 숫자를 넣으세요!!
+      </span>
+      <span ng-show="dfdf.hc.$error.max==true">
+      가게를 차리세요..
+      </span>
+      <span ng-show="dfdf.hc.$error.min==true">
+      사람이 없으면 뭐하러 치킨을 시키니??
+      </span>
     </div>
-
-    <!-- MAIN CONTENT -->
-    <div id="main_content_wrap" class="outer">
-      <section id="main_content" class="inner">
-        <p>ㅁㅁㅁ</p>
-      </section>
-    </div>
-
-    <!-- FOOTER  -->
-    <div id="footer_wrap" class="outer">
-      <footer class="inner">
-        <p class="copyright">Fibonachicken maintained by <a href="https://github.com/zeroxy">zeroxy</a></p>
-        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
-      </footer>
-    </div>
-
-    
-
-  </body>
+  </div>
+</div>
+</body>
 </html>
+
